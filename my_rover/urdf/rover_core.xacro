@@ -1,0 +1,370 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="mesh_path" default=""/>
+  <xacro:property name="mesh_path" value="$(arg mesh_path)"/>
+
+  <link name="base_link"/>
+
+  <link name="base_footprint">
+    <inertial>
+      <origin xyz="-0.013734 1.284E-07 0.19379" rpy="0 0 0" />
+      <mass value="1.3547" />
+      <inertia ixx="0.013689117130075036" ixy="0" ixz="0" iyy="0.021894768014062097" iyz="0" izz="0.01576690879607219" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/base_footprint.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.3098 0.3098 0.3098 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/base_footprint.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0058" rpy="0.0 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="base_footprint"/>
+    <axis xyz="0.0 0.0 0.0"/>
+  </joint>
+
+  <!-- RUEDA DELANTERA IZQUIERDA -->
+  <link name="wheel_left_link">
+    <inertial>
+      <origin xyz="-2.2999E-06 -3.4568E-06 0.001389" rpy="0 0 0" />
+      <mass value="0.17619" />
+      <inertia ixx="0.00012525902732995288" ixy="0" ixz="0" iyy="0.00012525902732995288" iyz="0" izz="0.00018786735147942053" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/wheel_left_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.29804 0.29804 0.29804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.040" length="0.03"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="wheel_left_link">
+    <mu1>1.0</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+  </gazebo>
+
+  <joint name="wheel_left_joint" type="continuous">
+    <origin xyz="0.10613 0.10832 0.040391" rpy="1.5708 0 -3.1416" />
+    <parent link="base_footprint" />
+    <child link="wheel_left_link" />
+    <axis xyz="0 0 1"/>
+    <limit effort="0.5" velocity="10" />
+    <dynamics damping="0.01" friction="0.01"/>
+  </joint>
+
+  <!-- RUEDA TRASERA IZQUIERDA -->
+  <link name="wheel_mleft_link">
+    <inertial>
+      <origin xyz="4.0169E-06 -5.6592E-06 0.0012178" rpy="0 0 0" />
+      <mass value="0.17732" />
+      <inertia ixx="0.00012022161509872456" ixy="0" ixz="0" iyy="0.00012022161509872456" iyz="0" izz="0.00018907788039674276" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/wheel_mleft_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.29804 0.29804 0.29804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.040" length="0.03"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="wheel_mleft_link">
+    <mu1>1.0</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+  </gazebo>
+
+  <joint name="wheel_mleft_joint" type="continuous">
+    <origin xyz="-0.15685 0.10832 0.040434" rpy="1.5708 0 -3.1416" />
+    <parent link="base_footprint" />
+    <child link="wheel_mleft_link" />
+    <axis xyz="0 0 1"/>
+    <limit effort="0.5" velocity="10" />
+    <dynamics damping="0.01" friction="0.01"/>
+  </joint>
+
+  <!-- RUEDA DELANTERA DERECHA -->
+  <link name="wheel_right_link">
+    <inertial>
+      <origin xyz="2.3002E-06 -3.4566E-06 0.0013906" rpy="0 0 0" />
+      <mass value="0.17619" />
+      <inertia ixx="6.5024E-05" ixy="-1.2336E-08" ixz="2.9143E-09" iyy="6.5026E-05" iyz="-1.5995E-09" izz="0.00011166" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/wheel_right_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.29804 0.29804 0.29804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.040" length="0.03"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="wheel_right_link">
+    <mu1>1.0</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+  </gazebo>
+
+  <joint name="wheel_right_joint" type="continuous">
+    <origin xyz="0.10613 -0.10832 0.040391" rpy="1.5708 0 0" />
+    <parent link="base_footprint" />
+    <child link="wheel_right_link" />
+    <axis xyz="0 0 -1"/>
+    <limit effort="0.5" velocity="10" />
+    <dynamics damping="0.01" friction="0.01"/>
+  </joint>
+
+  <!-- RUEDA TRASERA DERECHA -->
+  <link name="wheel_mright_link">
+    <inertial>
+      <origin xyz="-4.0166E-06 -5.6592E-06 0.0012194" rpy="0 0 0" />
+      <mass value="0.17732" />
+      <inertia ixx="0.00012022161509872456" ixy="0" ixz="0" iyy="0.00012022161509872456" iyz="0" izz="0.00018907788039674276" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/wheel_mright_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.50196 0.50196 0.50196 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.040" length="0.03"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="wheel_mright_link">
+    <mu1>1.0</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+  </gazebo>
+
+  <joint name="wheel_mright_joint" type="continuous">
+    <origin xyz="-0.15685 -0.10832 0.040434" rpy="1.5708 0 0" />
+    <parent link="base_footprint" />
+    <child link="wheel_mright_link" />
+    <axis xyz="0 0 -1"/>
+    <limit effort="0.5" velocity="10" />
+    <dynamics damping="0.01" friction="0.01"/>
+  </joint>
+
+  <!-- BRAZO -->
+  <link name="hombro_link">
+    <inertial>
+      <origin xyz="9.1858E-05 0.0042327 0.014701" rpy="0 0 0" />
+      <mass value="0.080425" />
+      <inertia ixx="1.5819E-05" ixy="2.8158E-07" ixz="-1.077E-08" iyy="2.1579E-05" iyz="-1.2522E-10" izz="3.147E-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/hombro_link.STL" />
+      </geometry>
+      <material name=""><color rgba="1 1 1 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/hombro_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="hombro_joint" type="revolute">
+    <origin xyz="0.041024 0 0.321" rpy="0 0 0" />
+    <parent link="base_footprint" />
+    <child link="hombro_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.5708" upper="1.5708" effort="0.5" velocity="1" />
+    <dynamics damping="0.1" friction="0.2" />
+  </joint>
+
+  <link name="brazo_link">
+    <inertial>
+      <origin xyz="-9.4767E-05 0.056315 0.018464" rpy="0 0 0" />
+      <mass value="0.024913" />
+      <inertia ixx="2.4588E-05" ixy="1.5258E-10" ixz="-4.1555E-09" iyy="2.3013E-06" iyz="7.9394E-12" izz="2.3824E-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/brazo_link.STL" />
+      </geometry>
+      <material name=""><color rgba="0.79608 0.82353 0.93725 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/brazo_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="brazo_joint" type="revolute">
+    <origin xyz="0.01028 5.7102E-05 0.018" rpy="1.5708 0 0" />
+    <parent link="hombro_link" />
+    <child link="brazo_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.5708" upper="1.5708" effort="0.5" velocity="1" />
+    <dynamics damping="0.1" friction="0.2" />
+  </joint>
+
+  <link name="ante_brazo_link">
+    <inertial>
+      <origin xyz="0.00030397 0.049109 -0.0015342" rpy="0 0 0" />
+      <mass value="0.075431" />
+      <inertia ixx="4.3505E-05" ixy="2.7945E-08" ixz="-2.6807E-11" iyy="9.0754E-06" iyz="-3.1381E-07" izz="4.0315E-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/ante_brazo_link.STL" />
+      </geometry>
+      <material name=""><color rgba="0.79608 0.82353 0.93725 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/ante_brazo_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="ante_brazo_joint" type="revolute">
+    <origin xyz="8.9828E-05 0.121 0.016172" rpy="3.1416 -0.0055546 3.1416" />
+    <parent link="brazo_link" />
+    <child link="ante_brazo_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.5708" upper="1.5708" effort="0.5" velocity="1" />
+    <dynamics damping="0.1" friction="0.2" />
+  </joint>
+
+  <link name="muneca_link">
+    <inertial>
+      <origin xyz="-0.0011171 0.016255 -0.0060926" rpy="0 0 0" />
+      <mass value="0.010179" />
+      <inertia ixx="1.7301E-06" ixy="8.8516E-08" ixz="-2.7208E-11" iyy="8.5201E-07" iyz="-1.5259E-10" izz="1.2945E-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/muneca_link.STL" />
+      </geometry>
+      <material name=""><color rgba="1 1 1 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="${mesh_path}/meshes/muneca_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="muneca_joint" type="revolute">
+    <origin xyz="0 0.122 0" rpy="0 0 0" />
+    <parent link="ante_brazo_link" />
+    <child link="muneca_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.5708" upper="1.5708" effort="0.5" velocity="1" />
+    <dynamics damping="0.1" friction="0.2" />
+  </joint>
+
+  <!-- LIDAR -->
+  <link name="lidar_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.04" length="0.05"/></geometry>
+      <material name="black"><color rgba="0.1 0.1 0.1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.04" length="0.05"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.000066" ixy="0" ixz="0" iyy="0.000066" iyz="0" izz="0.000080"/>
+    </inertial>
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.38" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+  </joint>
+
+  <gazebo reference="lidar_link">
+    <sensor name="lidar" type="gpu_lidar">
+      <pose>0 0 0 0 0 0</pose>
+      <update_rate>10</update_rate>
+      <topic>/scan</topic>
+      <gz_frame_id>lidar_link</gz_frame_id>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.12</min>
+          <max>10.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </lidar>
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+    </sensor>
+  </gazebo>
+
+</robot>
